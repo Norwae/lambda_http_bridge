@@ -143,25 +143,25 @@ const (
 
 func verifyHttpHeadersAndPathAsExpected(rw http.ResponseWriter, rq *http.Request) {
 	head := rq.Header
-	if  head.Get("Accept") ==  "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" &&
-		head.Get("Accept-Encoding") ==  "gzip, deflate, sdch" &&
-		head.Get("Accept-Language") ==  "en-US,en;q=0.8" &&
-		head.Get("Cache-Control") ==  "max-age=0" &&
-		head.Get("Content-Type") ==  "appliction/json" &&
-		head.Get("CloudFront-Forwarded-Proto") ==  "https" &&
-		head.Get("CloudFront-Is-Desktop-Viewer") ==  "true" &&
-		head.Get("CloudFront-Is-Mobile-Viewer") ==  "false" &&
-		head.Get("CloudFront-Is-SmartTV-Viewer") ==  "false" &&
-		head.Get("CloudFront-Is-Tablet-Viewer") ==  "false" &&
-		head.Get("CloudFront-Viewer-Country") ==  "US" &&
-		head.Get("Host") ==  "1234567890.execute-api.eu-west-1.amazonaws.com" &&
-		head.Get("Upgrade-Insecure-Requests") ==  "1" &&
-		head.Get("User-Agent") ==  "Custom User Agent String" &&
-		head.Get("Via") ==  "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)" &&
-		head.Get("X-Amz-Cf-Id") ==  "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==" &&
-		head.Get("X-Forwarded-For") ==  "127.0.0.1, 127.0.0.2" &&
-		head.Get("X-Forwarded-Port") ==  "443" &&
-		head.Get("X-Forwarded-Proto") ==  "https" &&
+	if head.Get("Accept") == "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" &&
+		head.Get("Accept-Encoding") == "gzip, deflate, sdch" &&
+		head.Get("Accept-Language") == "en-US,en;q=0.8" &&
+		head.Get("Cache-Control") == "max-age=0" &&
+		head.Get("Content-Type") == "appliction/json" &&
+		head.Get("CloudFront-Forwarded-Proto") == "https" &&
+		head.Get("CloudFront-Is-Desktop-Viewer") == "true" &&
+		head.Get("CloudFront-Is-Mobile-Viewer") == "false" &&
+		head.Get("CloudFront-Is-SmartTV-Viewer") == "false" &&
+		head.Get("CloudFront-Is-Tablet-Viewer") == "false" &&
+		head.Get("CloudFront-Viewer-Country") == "US" &&
+		head.Get("Host") == "1234567890.execute-api.eu-west-1.amazonaws.com" &&
+		head.Get("Upgrade-Insecure-Requests") == "1" &&
+		head.Get("User-Agent") == "Custom User Agent String" &&
+		head.Get("Via") == "1.1 08f323deadbeefa7af34d5feb414ce27.cloudfront.net (CloudFront)" &&
+		head.Get("X-Amz-Cf-Id") == "cDehVQoZnx43VYQb9j2-nvCh-9z396Uhbp027Y2JvkCPNLmGJHqlaA==" &&
+		head.Get("X-Forwarded-For") == "127.0.0.1, 127.0.0.2" &&
+		head.Get("X-Forwarded-Port") == "443" &&
+		head.Get("X-Forwarded-Proto") == "https" &&
 		rq.URL.Path == "/path/to/resource" {
 		rw.WriteHeader(204)
 	} else {
@@ -179,13 +179,13 @@ func noContentHandler(rw http.ResponseWriter, _ *http.Request) {
 func echoWriter(rw http.ResponseWriter, rq *http.Request) {
 	rw.Header().Add("Content-Type", "text/plain")
 	rest, _ := ioutil.ReadAll(rq.Body)
-	_,_ = rw.Write([]byte("Hello "))
-	_,_ = rw.Write(rest)
+	_, _ = rw.Write([]byte("Hello "))
+	_, _ = rw.Write(rest)
 }
 
 func binaryWriter(rw http.ResponseWriter, _ *http.Request) {
 	rw.Header().Add("Content-Type", "application/octet-stream")
-	_,_ = rw.Write([]byte{0, 1, 2, 3, 4, 5, 6, 7, 8})
+	_, _ = rw.Write([]byte{0, 1, 2, 3, 4, 5, 6, 7, 8})
 }
 
 func TestSimpleBridgeInvokePlain(t *testing.T) {
