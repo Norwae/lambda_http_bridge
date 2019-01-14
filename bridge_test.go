@@ -87,7 +87,8 @@ const (
     "proxy": "/path/to/resource"
   },
   "stageVariables": {
-    "baz": "qux"
+    "baz": "qux",
+	"My-Stage-Variable": "yellowsubmarine"
   },
   "headers": {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -162,6 +163,8 @@ func verifyHttpHeadersAndPathAsExpected(rw http.ResponseWriter, rq *http.Request
 		head.Get("X-Forwarded-For") == "127.0.0.1, 127.0.0.2" &&
 		head.Get("X-Forwarded-Port") == "443" &&
 		head.Get("X-Forwarded-Proto") == "https" &&
+		head.Get("X-Api-Gateway-Stage-Variable-Baz") == "qux" &&
+		head.Get("X-Api-Gateway-Stage-Variable-My-Stage-Variable") == "yellowsubmarine" &&
 		rq.URL.Path == "/path/to/resource" {
 		rw.WriteHeader(204)
 	} else {

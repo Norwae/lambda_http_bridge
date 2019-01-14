@@ -55,6 +55,10 @@ func buildBridgeRequest(ctx context.Context, request *events.APIGatewayProxyRequ
 			header.Add(k, v)
 		}
 
+		for k, v := range request.StageVariables {
+			header.Add("X-Api-Gateway-Stage-Variable-"+k, v)
+		}
+
 		if request.IsBase64Encoded {
 			body, err = base64.StdEncoding.DecodeString(request.Body)
 		} else {
